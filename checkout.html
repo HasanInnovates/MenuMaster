@@ -42,41 +42,16 @@
         <div class="row g-4">
             <div class="col-12">
 
-                <!-- Form Section -->
+                <!-- Order Note Section -->
                 <div class="card border-0 shadow-sm" style="border-radius: 16px;" id="checkoutFormSection">
                     <div class="card-body p-4">
                         <h4 class="fw-bold mb-1">Checkout</h4>
-                        <p class="text-muted small mb-4">Fill in your details to place the order</p>
+                        <p class="text-muted small mb-4">Review your order and add any notes</p>
 
                         <div class="row g-3">
-                            <div class="col-sm-6">
-                                <label class="form-label small fw-medium">Full Name</label>
-                                <input type="text" class="form-control" id="chkName" placeholder="John Doe">
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="form-label small fw-medium">Email</label>
-                                <input type="email" class="form-control" id="chkEmail" placeholder="john@example.com">
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="form-label small fw-medium">Phone</label>
-                                <input type="tel" class="form-control" id="chkPhone" placeholder="+1 234 567 890">
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="form-label small fw-medium">Delivery Time</label>
-                                <select class="form-select" id="chkTime">
-                                    <option value="asap">As soon as possible</option>
-                                    <option value="30">In 30 minutes</option>
-                                    <option value="60">In 1 hour</option>
-                                    <option value="90">In 1.5 hours</option>
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label small fw-medium">Delivery Address</label>
-                                <textarea class="form-control" id="chkAddress" rows="2" placeholder="Street, building, apartment number"></textarea>
-                            </div>
                             <div class="col-12">
                                 <label class="form-label small fw-medium">Order Note (optional)</label>
-                                <textarea class="form-control" id="chkNote" rows="1" placeholder="Any special requests..."></textarea>
+                                <textarea class="form-control" id="chkNote" rows="2" placeholder="Any special requests or instructions..."></textarea>
                             </div>
                         </div>
                     </div>
@@ -92,40 +67,23 @@
                             <span>Total</span>
                             <span class="text-danger" id="checkoutTotal">$0.00</span>
                         </div>
+                        <div class="mt-3 pt-2 border-top border-light" id="prepTimeDisplay">
+                            <div class="d-flex align-items-center gap-2 text-muted">
+                                <i class="fas fa-clock"></i>
+                                <span class="small" id="prepTimeText">Estimated preparation time: —</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Related Combos & Offers -->
+                <!-- Related Items -->
                 <div class="card border-0 shadow-sm mt-4" style="border-radius: 16px;" id="relatedSection">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <span class="badge bg-danger rounded-pill px-2 py-1"><i class="fas fa-fire me-1"></i>Deal</span>
                             <h6 class="fw-bold mb-0">You Might Also Like</h6>
                         </div>
-
-                        <!-- Combo Carousel Row -->
-                        <h6 class="fw-semibold text-muted mb-2 small text-uppercase tracking-wide"><i class="fas fa-object-group me-1"></i>Combo Offers</h6>
-                        <div id="comboCarousel" class="carousel slide mb-4" data-bs-interval="false">
-                            <div class="carousel-inner" id="comboCarouselInner"></div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#comboCarousel" data-bs-slide="prev" style="width:30px;">
-                                <span class="carousel-control-prev-icon" style="background-color:rgba(0,0,0,0.3);border-radius:50%;padding:10px;"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#comboCarousel" data-bs-slide="next" style="width:30px;">
-                                <span class="carousel-control-next-icon" style="background-color:rgba(0,0,0,0.3);border-radius:50%;padding:10px;"></span>
-                            </button>
-                        </div>
-
-                        <!-- Single Item Carousel Row -->
-                        <h6 class="fw-semibold text-muted mb-2 small text-uppercase tracking-wide"><i class="fas fa-tag me-1"></i>Single Offers</h6>
-                        <div id="singleCarousel" class="carousel slide" data-bs-interval="false">
-                            <div class="carousel-inner" id="singleCarouselInner"></div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#singleCarousel" data-bs-slide="prev" style="width:30px;">
-                                <span class="carousel-control-prev-icon" style="background-color:rgba(0,0,0,0.3);border-radius:50%;padding:10px;"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#singleCarousel" data-bs-slide="next" style="width:30px;">
-                                <span class="carousel-control-next-icon" style="background-color:rgba(0,0,0,0.3);border-radius:50%;padding:10px;"></span>
-                            </button>
-                        </div>
+                        <div id="relatedGrid" class="row g-3"></div>
                     </div>
                 </div>
 
@@ -152,6 +110,8 @@
                         </div>
                         <h3 class="fw-bold mb-2">Order Placed!</h3>
                         <p class="text-muted mb-1" id="successMessage">Your order has been placed successfully.</p>
+                        <p class="text-muted small" id="successPrepTime"></p>
+                        <p class="text-muted small" id="successNote"></p>
                         <p class="text-muted small">Order #<span id="orderNumber" class="fw-bold"></span></p>
                         <a href="index.html" class="btn btn-warning rounded-pill px-4 mt-3">
                             <i class="fas fa-arrow-left me-1"></i>Back to Menu
@@ -168,20 +128,29 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const cart = JSON.parse(localStorage.getItem('menuCart') || '[]');
         const itemsContainer = document.getElementById('checkoutItems');
         const totalEl = document.getElementById('checkoutTotal');
+        const prepTimeText = document.getElementById('prepTimeText');
 
-            const allOffers = [
-            { name: 'Family Feast', price: 27.99, desc: 'Large Pizza + 4 Drinks + Dessert', img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&h=180&fit=crop', match: ['pizza'] },
-            { name: 'Quick Lunch', price: 12.99, desc: 'Burger + Fries + Soft Drink', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&h=180&fit=crop', match: ['burger', 'classic burger'] },
-            { name: 'Sweet Tooth', price: 14.99, desc: '2 Desserts + 2 Coffees', img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&h=180&fit=crop', match: ['tiramisu', 'cake', 'dessert'] },
-            { name: 'Red Wine Glass', price: 4.99, desc: null, img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=200&h=180&fit=crop', match: ['pizza', 'pasta', 'seafood'] },
-            { name: 'Garlic Bread', price: 3.99, desc: null, img: 'https://images.unsplash.com/photo-1619535860434-ba1d8fa125d7?w=200&h=180&fit=crop', match: ['pizza', 'burger', 'salad'] },
-            { name: 'Cappuccino', price: 2.99, desc: null, img: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=200&h=180&fit=crop', match: ['tiramisu', 'cake', 'dessert'] }
+        const allOffers = [
+            { name: 'Family Feast', price: 27.99, desc: 'Large Pizza + 4 Drinks + Dessert', img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&h=180&fit=crop', prep: 25, match: ['pizza'] },
+            { name: 'Quick Lunch', price: 12.99, desc: 'Burger + Fries + Soft Drink', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&h=180&fit=crop', prep: 15, match: ['burger', 'classic burger'] },
+            { name: 'Sweet Tooth', price: 14.99, desc: '2 Desserts + 2 Coffees', img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&h=180&fit=crop', prep: 10, match: ['tiramisu', 'cake', 'dessert'] },
+            { name: 'Red Wine Glass', price: 4.99, desc: null, img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=200&h=180&fit=crop', prep: 2, match: ['pizza', 'pasta', 'seafood'] },
+            { name: 'Garlic Bread', price: 3.99, desc: null, img: 'https://images.unsplash.com/photo-1619535860434-ba1d8fa125d7?w=200&h=180&fit=crop', prep: 8, match: ['pizza', 'burger', 'salad'] },
+            { name: 'Cappuccino', price: 2.99, desc: null, img: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=200&h=180&fit=crop', prep: 5, match: ['tiramisu', 'cake', 'dessert'] }
         ];
+
+        function getTotalPrepTime() {
+            let maxPrep = 0;
+            cart.forEach(item => {
+                const p = item.prep || 15;
+                if (p > maxPrep) maxPrep = p;
+            });
+            return maxPrep;
+        }
 
         if (cart.length === 0) {
             itemsContainer.innerHTML = '<p class="text-muted text-center py-3">Your cart is empty. <a href="index.html" class="text-warning">Go back to menu</a></p>';
@@ -192,7 +161,7 @@
                 <div class="d-flex justify-content-between align-items-center py-2 border-bottom border-light">
                     <div class="flex-grow-1 min-w-0">
                         <div class="fw-medium small">${item.name}</div>
-                        <div class="text-muted" style="font-size:0.75rem;">$${item.price.toFixed(2)} each</div>
+                        <div class="text-muted" style="font-size:0.75rem;">$${item.price.toFixed(2)} each &middot; Prep ${item.prep || 15} min</div>
                     </div>
                     <div class="d-flex align-items-center gap-2 flex-shrink-0">
                         <div class="d-flex align-items-center gap-1">
@@ -207,6 +176,9 @@
             `).join('');
             const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
             totalEl.textContent = '$' + total.toFixed(2);
+
+            const totalPrep = getTotalPrepTime();
+            prepTimeText.textContent = 'Estimated preparation time: ' + totalPrep + ' min';
 
             document.querySelectorAll('.qty-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -231,102 +203,72 @@
                 });
             });
 
-            // Show related offers in separate carousels
+            // Related items matching
             const cartNames = cart.map(i => i.name.toLowerCase());
             const matched = allOffers.filter(offer =>
                 offer.match.some(keyword => cartNames.some(name => name.includes(keyword)))
             );
             const shown = new Set();
-            const combos = [], singles = [];
+            const relatedItems = [];
             matched.forEach(offer => {
                 if (shown.has(offer.name)) return;
                 shown.add(offer.name);
-                if (offer.desc) combos.push(offer);
-                else singles.push(offer);
+                relatedItems.push(offer);
             });
 
-            function populateCarousel(containerId, items, perSlide) {
-                const inner = document.getElementById(containerId);
-                if (items.length === 0) {
-                    const carousel = inner.closest('.carousel');
-                    const heading = carousel.previousElementSibling;
-                    if (heading) heading.style.display = 'none';
-                    carousel.style.display = 'none';
-                    return;
-                }
-                for (let s = 0; s < items.length; s += perSlide) {
-                    const slide = items.slice(s, s + perSlide);
-                    const active = s === 0 ? ' active' : '';
-                    inner.innerHTML += `<div class="carousel-item${active}"><div class="row g-3">`;
-                    slide.forEach(offer => {
-                        const alreadyInCart = cart.some(i => i.name === offer.name);
-                        inner.innerHTML += `
-                            <div class="col-lg-6">
-                                <div class="card menu-card-h border-0 shadow-sm" style="${alreadyInCart ? 'opacity:0.55;' : ''}">
-                                    <div class="row g-0 h-100">
-                                        <div class="col-5 menu-img-col">
-                                            <img src="${offer.img}" alt="${offer.name}">
-                                        </div>
-                                        <div class="col-7">
-                                            <div class="menu-card-body">
-                                                <h5 class="menu-item-title">${offer.name}</h5>
-                                                ${offer.desc ? '<p class="menu-item-desc">' + offer.desc + '</p>' : '<div style="flex-grow:1;"></div>'}
-                                                <div class="menu-item-meta">
-                                                    <span class="menu-price">$${offer.price.toFixed(2)}</span>
-                                                    ${alreadyInCart ? '<span class="badge bg-success" style="font-size:0.75rem;padding:5px 12px;border-radius:50px;">Added</span>' :
-                                                    '<button class="add-to-cart" data-name="' + offer.name + '" data-price="' + offer.price + '"><i class="fas fa-plus"></i></button>'}
-                                                </div>
+            const relatedGrid = document.getElementById('relatedGrid');
+            if (relatedItems.length === 0) {
+                document.getElementById('relatedSection').style.display = 'none';
+            } else {
+                relatedGrid.innerHTML = relatedItems.map(offer => {
+                    const alreadyInCart = cart.some(i => i.name === offer.name);
+                    return `
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card menu-card-h border-0 shadow-sm" style="${alreadyInCart ? 'opacity:0.55;' : ''}">
+                                <div class="row g-0 h-100">
+                                    <div class="col-5 menu-img-col">
+                                        <img src="${offer.img}" alt="${offer.name}">
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="menu-card-body">
+                                            <h5 class="menu-item-title">${offer.name}</h5>
+                                            ${offer.desc ? '<p class="menu-item-desc">' + offer.desc + '</p>' : '<div style="flex-grow:1;"></div>'}
+                                            <div class="menu-item-meta">
+                                                <span class="menu-price">$${offer.price.toFixed(2)}</span>
+                                                ${alreadyInCart ? '<span class="badge bg-success" style="font-size:0.75rem;padding:5px 12px;border-radius:50px;">Added</span>' :
+                                                '<button class="add-to-cart" data-name="' + offer.name + '" data-price="' + offer.price + '" data-prep="' + (offer.prep || 10) + '"><i class="fas fa-plus"></i></button>'}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        `;
+                        </div>
+                    `;
+                }).join('');
+
+                document.querySelectorAll('#relatedSection .add-to-cart').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const name = btn.dataset.name;
+                        const price = parseFloat(btn.dataset.price);
+                        const prep = parseInt(btn.dataset.prep) || 10;
+                        const existing = cart.find(i => i.name === name);
+                        if (existing) { existing.qty++; } else { cart.push({ name, price, qty: 1, prep }); }
+                        localStorage.setItem('menuCart', JSON.stringify(cart));
+                        location.reload();
                     });
-                    inner.innerHTML += `</div></div>`;
-                }
-            }
-
-            populateCarousel('comboCarouselInner', combos, 2);
-            populateCarousel('singleCarouselInner', singles, 2);
-
-            if (combos.length === 0 && singles.length === 0) {
-                document.getElementById('relatedSection').style.display = 'none';
-            }
-
-            document.querySelectorAll('#relatedSection .add-to-cart').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const name = btn.dataset.name;
-                    const price = parseFloat(btn.dataset.price);
-                    const existing = cart.find(i => i.name === name);
-                    if (existing) { existing.qty++; } else { cart.push({ name, price, qty: 1 }); }
-                    localStorage.setItem('menuCart', JSON.stringify(cart));
-                    location.reload();
                 });
-            });
+            }
         }
 
         document.getElementById('placeOrderBtn').addEventListener('click', () => {
-            const name = document.getElementById('chkName').value.trim();
-            const email = document.getElementById('chkEmail').value.trim();
-            const phone = document.getElementById('chkPhone').value.trim();
-            const address = document.getElementById('chkAddress').value.trim();
-
-            const missing = [];
-            if (!name) missing.push('Full Name');
-            if (!email) missing.push('Email');
-            if (!phone) missing.push('Phone');
-            if (!address) missing.push('Delivery Address');
-
-            if (missing.length) {
-                alert('Please fill in: ' + missing.join(', '));
-                return;
-            }
-
+            const note = document.getElementById('chkNote').value.trim();
             const num = 'MM-' + Date.now().toString().slice(-8);
+            const totalPrep = getTotalPrepTime();
+
             document.getElementById('orderNumber').textContent = num;
-            document.getElementById('successMessage').textContent =
-                `Thank you, ${name}! Your order will be delivered to "${address}" soon.`;
+            document.getElementById('successMessage').textContent = 'Thank you! Your order has been placed successfully.';
+            document.getElementById('successPrepTime').textContent = 'Estimated preparation time: ' + totalPrep + ' minutes';
+            document.getElementById('successNote').textContent = note ? 'Note: ' + note : '';
 
             document.getElementById('checkoutFormSection').style.display = 'none';
             document.querySelector('.container.py-5:not(#successSection)').style.display = 'none';

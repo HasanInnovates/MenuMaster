@@ -19,11 +19,12 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
         const name = card.dataset.name;
         const price = parseFloat(card.dataset.price);
 
+        const prep = parseInt(card.dataset.prepTime) || 15;
         const existing = cart.find(item => item.name === name);
         if (existing) {
             existing.qty++;
         } else {
-            cart.push({ name, price, qty: 1 });
+            cart.push({ name, price, qty: 1, prep });
         }
 
         updateCart();
