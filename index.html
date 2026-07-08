@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Master - Restaurant</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <i class="fas fa-utensils fs-3"></i>
+                <span class="fw-bold fs-4">Menu Master</span>
+            </a>
+            <div class="d-flex align-items-center position-relative">
+                <a href="checkout.html" class="cart-icon text-white text-decoration-none position-relative">
+                    <i class="fas fa-shopping-cart fs-5"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Category Pills -->
+    <section class="py-4 border-bottom bg-white sticky-categories">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="appetizers">Appetizers</button>
+                <button class="category-btn" data-category="main">Main Course</button>
+                <button class="category-btn" data-category="desserts">Desserts</button>
+                <button class="category-btn" data-category="beverages">Beverages</button>
+                <button class="category-btn" data-category="salads">Salads</button>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center gap-2 mt-3" id="subCategoryContainer" style="display: none !important;"></div>
+        </div>
+    </section>
+
+    <!-- Menu Grid -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Our <span class="text-warning">Menu</span></h2>
+                <p class="text-muted">Choose from a wide variety of delicious options</p>
+            </div>
+            <div class="row g-4" id="menuGrid">
+
+                <div class="col-lg-6 menu-item" data-category="appetizers" data-subcategory="hot" data-name="Bruschetta" data-price="8.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col">
+                                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=350&fit=crop" alt="Bruschetta">
+                                <span class="badge bg-warning text-dark menu-badge">Popular</span>
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body">
+                                    <h5 class="menu-item-title">Bruschetta</h5>
+                                    <p class="menu-item-desc">Toasted bread topped with fresh tomatoes, basil, and mozzarella.</p>
+                                    <div class="menu-item-meta">
+                                        <span class="menu-price">$8.99</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star-half-alt text-warning"></i>
+                                            </div>
+                                            <span class="rating-count">(42)</span>
+                                            <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item" data-category="appetizers" data-subcategory="fried" data-name="Spring Rolls" data-price="6.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col">
+                                <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=400&h=350&fit=crop" alt="Spring Rolls">
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body">
+                                    <h5 class="menu-item-title">Spring Rolls</h5>
+                                    <p class="menu-item-desc">Crispy rolls stuffed with vegetables and served with sweet chili dip.</p>
+                                    <div class="menu-item-meta">
+                                        <span class="menu-price">$6.99</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="far fa-star text-warning"></i>
+                                            </div>
+                                            <span class="rating-count">(28)</span>
+                                            <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item" data-category="main" data-subcategory="pizza" data-name="Margherita Pizza" data-price="14.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col">
+                                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=350&fit=crop" alt="Margherita Pizza">
+                                <span class="badge bg-danger text-white menu-badge">Bestseller</span>
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body">
+                                    <h5 class="menu-item-title">Margherita Pizza</h5>
+                                    <p class="menu-item-desc">Classic pizza with fresh mozzarella, tomatoes, and basil on a crispy crust.</p>
+                                    <div class="menu-item-meta">
+                                        <span class="menu-price">$14.99</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                            </div>
+                                            <span class="rating-count">(156)</span>
+                                            <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item" data-category="main" data-subcategory="seafood" data-name="Grilled Salmon" data-price="18.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col">
+                                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=350&fit=crop" alt="Grilled Salmon">
+                                <span class="badge bg-success text-white menu-badge">New</span>
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body">
+                                    <h5 class="menu-item-title">Grilled Salmon</h5>
+                                    <p class="menu-item-desc">Atlantic salmon fillet grilled to perfection with lemon herb butter.</p>
+                                    <div class="menu-item-meta">
+                                        <span class="menu-price">$18.99</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star-half-alt text-warning"></i>
+                                            </div>
+                                            <span class="rating-count">(89)</span>
+                                            <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item" data-category="main" data-subcategory="burgers" data-name="Classic Burger" data-price="11.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col">
+                                <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400&h=350&fit=crop" alt="Classic Burger">
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body">
+                                    <h5 class="menu-item-title">Classic Burger</h5>
+                                    <p class="menu-item-desc">Juicy beef patty with cheddar, lettuce, tomato, and our secret sauce.</p>
+                                    <div class="menu-item-meta">
+                                        <span class="menu-price">$11.99</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="far fa-star text-warning"></i>
+                                            </div>
+                                            <span class="rating-count">(67)</span>
+                                            <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item" data-category="desserts" data-subcategory="cakes" data-name="Tiramisu" data-price="7.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col">
+                                <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=350&fit=crop" alt="Tiramisu">
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body">
+                                    <h5 class="menu-item-title">Tiramisu</h5>
+                                    <p class="menu-item-desc">Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone.</p>
+                                    <div class="menu-item-meta">
+                                        <span class="menu-price">$7.99</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                            </div>
+                                            <span class="rating-count">(53)</span>
+                                            <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item" data-category="beverages" data-subcategory="cold" data-name="Fresh Lemonade" data-price="3.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col">
+                                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&h=350&fit=crop" alt="Fresh Lemonade">
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body">
+                                    <h5 class="menu-item-title">Fresh Lemonade</h5>
+                                    <p class="menu-item-desc">House-made lemonade with fresh mint and a hint of honey.</p>
+                                    <div class="menu-item-meta">
+                                        <span class="menu-price">$3.99</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star-half-alt text-warning"></i>
+                                            </div>
+                                            <span class="rating-count">(35)</span>
+                                            <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 menu-item" data-category="salads" data-subcategory="green" data-name="Caesar Salad" data-price="9.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col">
+                                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=350&fit=crop" alt="Caesar Salad">
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body">
+                                    <h5 class="menu-item-title">Caesar Salad</h5>
+                                    <p class="menu-item-desc">Crisp romaine, parmesan, croutons, and classic Caesar dressing.</p>
+                                    <div class="menu-item-meta">
+                                        <span class="menu-price">$9.99</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="far fa-star text-warning"></i>
+                                            </div>
+                                            <span class="rating-count">(47)</span>
+                                            <button class="add-to-cart"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Offers & Combos -->
+    <section class="py-4 bg-warning bg-opacity-10 border-bottom">
+        <div class="container">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge bg-danger rounded-pill px-3 py-2"><i class="fas fa-fire me-1"></i>Hot Offers</span>
+                <h5 class="fw-bold mb-0">Deals</h5>
+            </div>
+
+            <!-- Combo Deals -->
+            <h6 class="fw-semibold text-muted mb-2 small text-uppercase tracking-wide"><i class="fas fa-object-group me-1"></i>Combo Offers</h6>
+            <div class="row g-3 mb-4">
+                <div class="col-lg-4 col-md-6 offer-item" data-name="Family Feast" data-price="27.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col" style="min-height:130px;">
+                                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=350&fit=crop" alt="Family Feast">
+                                <span class="badge bg-success menu-badge">Save 30%</span>
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body" style="padding:14px 16px;">
+                                    <h5 class="menu-item-title" style="font-size:1rem;">Family Feast</h5>
+                                    <p class="menu-item-desc" style="font-size:0.78rem;">Large Pizza + 4 Drinks + Dessert</p>
+                                    <div class="menu-item-meta">
+                                        <div>
+                                            <span class="text-decoration-line-through text-muted small me-1">$39.99</span>
+                                            <span class="menu-price" style="font-size:1.1rem;">$27.99</span>
+                                        </div>
+                                        <button class="add-to-cart" style="width:32px;height:32px;font-size:0.75rem;position:static;flex-shrink:0;"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 offer-item" data-name="Quick Lunch" data-price="12.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col" style="min-height:130px;">
+                                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=350&fit=crop" alt="Quick Lunch">
+                                <span class="badge bg-success menu-badge">Save 32%</span>
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body" style="padding:14px 16px;">
+                                    <h5 class="menu-item-title" style="font-size:1rem;">Quick Lunch</h5>
+                                    <p class="menu-item-desc" style="font-size:0.78rem;">Burger + Fries + Soft Drink</p>
+                                    <div class="menu-item-meta">
+                                        <div>
+                                            <span class="text-decoration-line-through text-muted small me-1">$18.99</span>
+                                            <span class="menu-price" style="font-size:1.1rem;">$12.99</span>
+                                        </div>
+                                        <button class="add-to-cart" style="width:32px;height:32px;font-size:0.75rem;position:static;flex-shrink:0;"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 offer-item" data-name="Sweet Tooth" data-price="14.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col" style="min-height:130px;">
+                                <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=350&fit=crop" alt="Sweet Tooth">
+                                <span class="badge bg-success menu-badge">Save 35%</span>
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body" style="padding:14px 16px;">
+                                    <h5 class="menu-item-title" style="font-size:1rem;">Sweet Tooth</h5>
+                                    <p class="menu-item-desc" style="font-size:0.78rem;">2 Desserts + 2 Coffees</p>
+                                    <div class="menu-item-meta">
+                                        <div>
+                                            <span class="text-decoration-line-through text-muted small me-1">$22.99</span>
+                                            <span class="menu-price" style="font-size:1.1rem;">$14.99</span>
+                                        </div>
+                                        <button class="add-to-cart" style="width:32px;height:32px;font-size:0.75rem;position:static;flex-shrink:0;"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Offers -->
+            <h6 class="fw-semibold text-muted mb-2 small text-uppercase tracking-wide"><i class="fas fa-tag me-1"></i>Item Offers</h6>
+            <div class="row g-3">
+                <div class="col-lg-3 col-md-6 offer-item" data-name="Red Wine Glass" data-price="4.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col" style="min-height:120px;">
+                                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&h=350&fit=crop" alt="Red Wine Glass">
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body" style="padding:12px 14px;">
+                                    <h5 class="menu-item-title" style="font-size:0.95rem;">Red Wine Glass</h5>
+                                    <div style="flex-grow:1;"></div>
+                                    <div class="menu-item-meta">
+                                        <div>
+                                            <span class="text-decoration-line-through text-muted small me-1">$7.99</span>
+                                            <span class="menu-price" style="font-size:1rem;">$4.99</span>
+                                        </div>
+                                        <button class="add-to-cart" style="width:30px;height:30px;font-size:0.7rem;position:static;flex-shrink:0;"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 offer-item" data-name="Grilled Salmon" data-price="14.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col" style="min-height:120px;">
+                                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=350&fit=crop" alt="Grilled Salmon">
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body" style="padding:12px 14px;">
+                                    <h5 class="menu-item-title" style="font-size:0.95rem;">Grilled Salmon</h5>
+                                    <div style="flex-grow:1;"></div>
+                                    <div class="menu-item-meta">
+                                        <div>
+                                            <span class="text-decoration-line-through text-muted small me-1">$18.99</span>
+                                            <span class="menu-price" style="font-size:1rem;">$14.99</span>
+                                        </div>
+                                        <button class="add-to-cart" style="width:30px;height:30px;font-size:0.7rem;position:static;flex-shrink:0;"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 offer-item" data-name="Cappuccino" data-price="2.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col" style="min-height:120px;">
+                                <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=350&fit=crop" alt="Cappuccino">
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body" style="padding:12px 14px;">
+                                    <h5 class="menu-item-title" style="font-size:0.95rem;">Cappuccino</h5>
+                                    <div style="flex-grow:1;"></div>
+                                    <div class="menu-item-meta">
+                                        <div>
+                                            <span class="text-decoration-line-through text-muted small me-1">$4.99</span>
+                                            <span class="menu-price" style="font-size:1rem;">$2.99</span>
+                                        </div>
+                                        <button class="add-to-cart" style="width:30px;height:30px;font-size:0.7rem;position:static;flex-shrink:0;"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 offer-item" data-name="Garlic Bread" data-price="3.99">
+                    <div class="card menu-card-h border-0 shadow-sm">
+                        <div class="row g-0 h-100">
+                            <div class="col-5 menu-img-col" style="min-height:120px;">
+                                <img src="https://images.unsplash.com/photo-1619535860434-ba1d8fa125d7?w=400&h=350&fit=crop" alt="Garlic Bread">
+                            </div>
+                            <div class="col-7">
+                                <div class="menu-card-body" style="padding:12px 14px;">
+                                    <h5 class="menu-item-title" style="font-size:0.95rem;">Garlic Bread</h5>
+                                    <div style="flex-grow:1;"></div>
+                                    <div class="menu-item-meta">
+                                        <div>
+                                            <span class="text-decoration-line-through text-muted small me-1">$5.99</span>
+                                            <span class="menu-price" style="font-size:1rem;">$3.99</span>
+                                        </div>
+                                        <button class="add-to-cart" style="width:30px;height:30px;font-size:0.7rem;position:static;flex-shrink:0;"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="fas fa-utensils fs-3 text-warning"></i>
+                        <span class="fw-bold fs-4">Menu Master</span>
+                    </div>
+                    <p class="text-white-50 small">Serving delicious meals made from the freshest ingredients. Taste the difference quality makes.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white-50 text-decoration-none"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white-50 text-decoration-none"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white-50 text-decoration-none"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white-50 text-decoration-none"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled small text-white-50">
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Menu</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Reservations</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="fw-bold mb-3">Hours</h6>
+                    <ul class="list-unstyled small text-white-50">
+                        <li class="mb-2">Mon-Fri: 11am-10pm</li>
+                        <li class="mb-2">Sat: 10am-11pm</li>
+                        <li class="mb-2">Sun: 10am-9pm</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="fw-bold mb-3">Newsletter</h6>
+                    <p class="small text-white-50">Subscribe for exclusive deals and new menu items.</p>
+                    <div class="input-group">
+                        <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email">
+                        <button class="btn btn-warning btn-sm" type="button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <p class="text-center text-white-50 small mb-0">&copy; 2026 Menu Master. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
